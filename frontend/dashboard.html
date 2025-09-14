@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Gen AI Hackathon</title>
+    <title>Dashboard - MindWell</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="nav-container">
-                <h1 class="logo">Gen AI Dashboard</h1>
+                <h1 class="logo">MindWell Dashboard</h1>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#analytics">Analytics</a></li>
-                    <li><a href="#settings">Settings</a></li>
+                    <li><a href="voice-agent.html">Voice Friend</a></li>
+                    <li><a href="heat-map.html">Stress Map</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="emotional-journey.html">My Journey</a></li>
                 </ul>
             </div>
         </nav>
@@ -42,37 +43,37 @@
     <main id="dashboardContent" class="dashboard-content hidden">
         <div class="container">
             <section class="welcome-section">
-                <h1 class="welcome-title">Welcome to Your Dashboard</h1>
-                <p class="welcome-subtitle">Manage your AI projects and explore new possibilities</p>
+                <h1 class="welcome-title">Welcome to MindWell</h1>
+                <p class="welcome-subtitle">Your personal mental health companion - track, connect, and grow</p>
             </section>
 
             <section class="dashboard-grid">
                 <div class="dashboard-card">
-                    <div class="card-icon">🚀</div>
-                    <h3>AI Projects</h3>
-                    <p>Create and manage your AI-powered applications</p>
-                    <button class="card-btn">View Projects</button>
+                    <div class="card-icon">🎤</div>
+                    <h3>Voice Agent Friend</h3>
+                    <p>Chat with your AI mental health companion anytime</p>
+                    <button class="card-btn" onclick="window.location.href='voice-agent.html'">Talk Now</button>
                 </div>
 
                 <div class="dashboard-card">
-                    <div class="card-icon">📊</div>
-                    <h3>Analytics</h3>
-                    <p>Track performance and usage statistics</p>
-                    <button class="card-btn">View Analytics</button>
+                    <div class="card-icon">🗺️</div>
+                    <h3>Stress Heat Map</h3>
+                    <p>Visualize stress patterns across India</p>
+                    <button class="card-btn" onclick="window.location.href='heat-map.html'">View Map</button>
                 </div>
 
                 <div class="dashboard-card">
-                    <div class="card-icon">🤖</div>
-                    <h3>AI Models</h3>
-                    <p>Access and configure AI models</p>
-                    <button class="card-btn">Manage Models</button>
+                    <div class="card-icon">🤝</div>
+                    <h3>Community Stories</h3>
+                    <p>Share your journey and connect with others</p>
+                    <button class="card-btn" onclick="window.location.href='community.html'">Join Community</button>
                 </div>
 
                 <div class="dashboard-card">
-                    <div class="card-icon">⚙️</div>
-                    <h3>Settings</h3>
-                    <p>Customize your account and preferences</p>
-                    <button class="card-btn">Open Settings</button>
+                    <div class="card-icon">📝</div>
+                    <h3>Emotional Journey</h3>
+                    <p>Track your mood and emotional wellness</p>
+                    <button class="card-btn" onclick="window.location.href='emotional-journey.html'">Track Mood</button>
                 </div>
             </section>
 
@@ -82,8 +83,8 @@
                     <div class="activity-item">
                         <div class="activity-icon">✅</div>
                         <div class="activity-content">
-                            <h4>Account Created</h4>
-                            <p>Welcome to Gen AI Hackathon platform!</p>
+                            <h4>Welcome to MindWell!</h4>
+                            <p>Your mental health journey starts here. Explore our features and connect with our supportive community.</p>
                             <span class="activity-time">Just now</span>
                         </div>
                     </div>

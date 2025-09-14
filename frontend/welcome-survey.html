@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Survey - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .survey-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #f0fff4 100%);
+            padding: 2rem 0;
+        }
+
+        .survey-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .survey-header {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f3e8ff 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .survey-title {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .survey-subtitle {
+            font-size: 1.1rem;
+            color: #475569;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .survey-progress {
+            background: #f1f5f9;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .survey-content {
+            padding: 3rem 2rem;
+        }
+
+        .question-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question {
+            margin-bottom: 3rem;
+        }
+
+        .question-title {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .question-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #10b981;
+            background: #f0fdf4;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .option-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+        }
+
+        .option-text {
+            flex: 1;
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .option-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #10b981;
+            background: white;
+        }
+
+        .slider-container {
+            margin: 2rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-prev {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-prev:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: white;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .completion-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .completion-title {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .completion-text {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .checkbox-option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .checkbox-option:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .checkbox-option.selected {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .checkbox-option input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <div class="survey-card">
+            <div class="survey-header">
+                <h1 class="survey-title">Welcome to MindWell! 🌸</h1>
+                <p class="survey-subtitle">
+                    Help us understand you better so we can provide personalized support for your mental wellness journey.
+                </p>
+            </div>
+
+            <div class="survey-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">1 of 8</span>
+            </div>
+
+            <div class="survey-content">
+                <!-- Question 1: Basic Info -->
+                <div class="question-section active" data-question="1">
+                    <div class="question">
+                        <h3 class="question-title">What's your current life stage?</h3>
+                        <div class="question-options">
+                            <div class="option" data-value="school">
+                                <div class="option-icon">🎒</div>
+                                <div class="option-text">
+                                    <div class="option-title">School Student</div>
+                                    <div class="option-desc">Currently in high school or secondary education</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="college">
+                                <div class="option-icon">🎓</div>
+                                <div class="option-text">
+                                    <div class="option-title">College Student</div>
+                                    <div class="option-desc">Pursuing undergraduate or graduate studies</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="working">
+                                <div class="option-icon">💼</div>
+                                <div class="option-text">
+                                    <div class="option-title">Working Professional</div>
+                                    <div class="option-desc">Employed full-time or part-time</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="searching">
+                                <div class="option-icon">🔍</div>
+                                <div class="option-text">
+                                    <div class="option-title">Job Searching</div>
+                                    <div class="option-desc">Looking for employment opportunities</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2: Living Situation -->
+                <div class="question-section" data-question="2">
+                    <div class="question">
+                        <h3 class="question-title">Where do you currently live?</h3>
+                        <div class="question-options">
+                            <div class="option" data-value="family">
+                                <div class="option-icon">🏠</div>
+                                <div class="option-text">
+                                    <div class="option-title">With Family</div>
+                                    <div class="option-desc">Living with parents or relatives</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="hostel">
+                                <div class="option-icon">🏫</div>
+                                <div class="option-text">
+                                    <div class="option-title">Hostel/Dormitory</div>
+                                    <div class="option-desc">College or work accommodation</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="friends">
+                                <div class="option-icon">👥</div>
+                                <div class="option-text">
+                                    <div class="option-title">With Friends/Roommates</div>
+                                    <div class="option-desc">Shared accommodation with peers</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="alone">
+                                <div class="option-icon">🏡</div>
+                                <div class="option-text">
+                                    <div class="option-title">Living Alone</div>
+                                    <div class="option-desc">Independent living arrangement</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3: Primary Stress Source -->
+                <div class="question-section" data-question="3">
+                    <div class="question">
+                        <h3 class="question-title">What's your primary source of stress?</h3>
+                        <div class="question-options">
+                            <div class="option" data-value="academic">
+                                <div class="option-icon">📚</div>
+                                <div class="option-text">
+                                    <div class="option-title">Academic Pressure</div>
+                                    <div class="option-desc">Exams, grades, assignments, competition</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="career">
+                                <div class="option-icon">🎯</div>
+                                <div class="option-text">
+                                    <div class="option-title">Career Uncertainty</div>
+                                    <div class="option-desc">Job prospects, career choices, future planning</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="family">
+                                <div class="option-icon">👨‍👩‍👧‍👦</div>
+                                <div class="option-text">
+                                    <div class="option-title">Family Expectations</div>
+                                    <div class="option-desc">Parental pressure, family responsibilities</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="social">
+                                <div class="option-icon">🤝</div>
+                                <div class="option-text">
+                                    <div class="option-title">Social Relationships</div>
+                                    <div class="option-desc">Friendships, romantic relationships, social anxiety</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="financial">
+                                <div class="option-icon">💰</div>
+                                <div class="option-text">
+                                    <div class="option-title">Financial Concerns</div>
+                                    <div class="option-desc">Money management, expenses, financial independence</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4: Stress Level -->
+                <div class="question-section" data-question="4">
+                    <div class="question">
+                        <h3 class="question-title">How would you rate your current stress level?</h3>
+                        <div class="slider-container">
+                            <input type="range" min="1" max="10" value="5" class="slider" id="stressLevel">
+                            <div class="slider-labels">
+                                <span>😌 Very Low</span>
+                                <span>😰 Very High</span>
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 1rem; color: #64748b;">
+                            Current level: <strong id="stressValue">5</strong>/10
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Question 5: Support System -->
+                <div class="question-section" data-question="5">
+                    <div class="question">
+                        <h3 class="question-title">Who do you usually talk to when you're stressed?</h3>
+                        <div class="checkbox-group">
+                            <div class="checkbox-option" data-value="family">
+                                <input type="checkbox" id="support-family">
+                                <div>👨‍👩‍👧‍👦<br>Family Members</div>
+                            </div>
+                            <div class="checkbox-option" data-value="friends">
+                                <input type="checkbox" id="support-friends">
+                                <div>👫<br>Close Friends</div>
+                            </div>
+                            <div class="checkbox-option" data-value="partner">
+                                <input type="checkbox" id="support-partner">
+                                <div>💕<br>Romantic Partner</div>
+                            </div>
+                            <div class="checkbox-option" data-value="counselor">
+                                <input type="checkbox" id="support-counselor">
+                                <div>👩‍⚕️<br>Counselor/Therapist</div>
+                            </div>
+                            <div class="checkbox-option" data-value="online">
+                                <input type="checkbox" id="support-online">
+                                <div>💬<br>Online Communities</div>
+                            </div>
+                            <div class="checkbox-option" data-value="none">
+                                <input type="checkbox" id="support-none">
+                                <div>🤐<br>No One (Keep to myself)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 6: Coping Mechanisms -->
+                <div class="question-section" data-question="6">
+                    <div class="question">
+                        <h3 class="question-title">How do you currently cope with stress? (Select all that apply)</h3>
+                        <div class="checkbox-group">
+                            <div class="checkbox-option" data-value="exercise">
+                                <input type="checkbox" id="cope-exercise">
+                                <div>🏃‍♂️<br>Exercise/Sports</div>
+                            </div>
+                            <div class="checkbox-option" data-value="music">
+                                <input type="checkbox" id="cope-music">
+                                <div>🎵<br>Music/Art</div>
+                            </div>
+                            <div class="checkbox-option" data-value="meditation">
+                                <input type="checkbox" id="cope-meditation">
+                                <div>🧘‍♀️<br>Meditation/Yoga</div>
+                            </div>
+                            <div class="checkbox-option" data-value="social">
+                                <input type="checkbox" id="cope-social">
+                                <div>👥<br>Social Media</div>
+                            </div>
+                            <div class="checkbox-option" data-value="sleep">
+                                <input type="checkbox" id="cope-sleep">
+                                <div>😴<br>Sleep/Rest</div>
+                            </div>
+                            <div class="checkbox-option" data-value="unhealthy">
+                                <input type="checkbox" id="cope-unhealthy">
+                                <div>🚬<br>Unhealthy Habits</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 7: Goals -->
+                <div class="question-section" data-question="7">
+                    <div class="question">
+                        <h3 class="question-title">What do you hope to achieve with MindWell?</h3>
+                        <div class="question-options">
+                            <div class="option" data-value="stress-management">
+                                <div class="option-icon">🧘‍♀️</div>
+                                <div class="option-text">
+                                    <div class="option-title">Better Stress Management</div>
+                                    <div class="option-desc">Learn healthy coping strategies</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="community">
+                                <div class="option-icon">🤝</div>
+                                <div class="option-text">
+                                    <div class="option-title">Connect with Others</div>
+                                    <div class="option-desc">Find supportive community</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="tracking">
+                                <div class="option-icon">📊</div>
+                                <div class="option-text">
+                                    <div class="option-title">Track My Progress</div>
+                                    <div class="option-desc">Monitor emotional wellness</div>
+                                </div>
+                            </div>
+                            <div class="option" data-value="professional">
+                                <div class="option-icon">👩‍⚕️</div>
+                                <div class="option-text">
+                                    <div class="option-title">Professional Support</div>
+                                    <div class="option-desc">Access to mental health resources</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 8: Additional Info -->
+                <div class="question-section" data-question="8">
+                    <div class="question">
+                        <h3 class="question-title">Is there anything else you'd like us to know?</h3>
+                        <textarea class="text-input" rows="4" placeholder="Share any specific concerns, experiences, or goals you have regarding your mental health journey... (Optional)"></textarea>
+                    </div>
+                </div>
+
+                <!-- Completion -->
+                <div class="question-section" data-question="9">
+                    <div class="completion-section">
+                        <div class="completion-icon">🎉</div>
+                        <h2 class="completion-title">Welcome to MindWell!</h2>
+                        <p class="completion-text">
+                            Thank you for sharing with us. We'll use this information to personalize your experience and provide better support for your mental wellness journey.
+                        </p>
+                        <button class="nav-btn btn-next" onclick="completeSurvey()">Start My Journey</button>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn btn-prev" id="prevBtn" onclick="previousQuestion()" style="display: none;">Previous</button>
+                    <button class="nav-btn btn-next" id="nextBtn" onclick="nextQuestion()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 8;
+        let surveyData = {};
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${currentQuestion} of ${totalQuestions}`;
+        }
+
+        function showQuestion(questionNum) {
+            document.querySelectorAll('.question-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelector(`[data-question="${questionNum}"]`).classList.add('active');
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').style.display = questionNum > 1 ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = questionNum < 9 ? 'block' : 'none';
+            
+            updateProgress();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else if (currentQuestion === totalQuestions) {
+                currentQuestion = 9; // Show completion
+                showQuestion(9);
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function completeSurvey() {
+            // Store survey completion in localStorage
+            localStorage.setItem('mindwell_survey_completed', 'true');
+            localStorage.setItem('mindwell_survey_data', JSON.stringify(surveyData));
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
+        }
+
+        // Handle option selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.option')) {
+                const option = e.target.closest('.option');
+                const questionSection = option.closest('.question-section');
+                
+                // Single select questions
+                questionSection.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                
+                // Store data
+                const questionNum = questionSection.dataset.question;
+                const value = option.dataset.value;
+                surveyData[`question_${questionNum}`] = value;
+            }
+            
+            if (e.target.closest('.checkbox-option')) {
+                const option = e.target.closest('.checkbox-option');
+                const checkbox = option.querySelector('input');
+                
+                option.classList.toggle('selected');
+                checkbox.checked = !checkbox.checked;
+                
+                // Store checkbox data
+                const questionSection = option.closest('.question-section');
+                const questionNum = questionSection.dataset.question;
+                if (!surveyData[`question_${questionNum}`]) {
+                    surveyData[`question_${questionNum}`] = [];
+                }
+                
+                const value = option.dataset.value;
+                if (checkbox.checked) {
+                    surveyData[`question_${questionNum}`].push(value);
+                } else {
+                    const index = surveyData[`question_${questionNum}`].indexOf(value);
+                    if (index > -1) {
+                        surveyData[`question_${questionNum}`].splice(index, 1);
+                    }
+                }
+            }
+        });
+
+        // Handle stress level slider
+        document.getElementById('stressLevel').addEventListener('input', function() {
+            document.getElementById('stressValue').textContent = this.value;
+            surveyData.stress_level = this.value;
+        });
+
+        // Handle text input
+        document.querySelector('textarea').addEventListener('input', function() {
+            surveyData.additional_info = this.value;
+        });
+
+        // Initialize
+        updateProgress();
+    </script>
+
+    <script type="module" src="firebase-config.js?v=2"></script>
+    <script type="module" src="auth.js?v=2"></script>
+</body>
+</html>

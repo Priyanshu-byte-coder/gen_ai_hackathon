@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Heat Map - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .heat-map-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding-top: 100px;
+        }
+
+        .heat-map-hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .heat-map-title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .heat-map-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .map-visualization {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .india-map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 50%, #81e6d9 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-overlay {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .map-overlay h3 {
+            font-size: 2rem;
+            color: #38a169;
+            margin-bottom: 1rem;
+        }
+
+        .stress-indicators {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stress-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: pulse-stress 2s infinite;
+        }
+
+        .stress-high {
+            background: rgba(245, 101, 101, 0.8);
+            top: 30%;
+            left: 60%;
+        }
+
+        .stress-medium {
+            background: rgba(246, 173, 85, 0.8);
+            top: 50%;
+            left: 40%;
+        }
+
+        .stress-low {
+            background: rgba(72, 187, 120, 0.8);
+            top: 70%;
+            left: 70%;
+        }
+
+        @keyframes pulse-stress {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.5); opacity: 0.4; }
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .legend-high { background: #f56565; }
+        .legend-medium { background: #f6ad55; }
+        .legend-low { background: #48bb78; }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .insight-card h4 {
+            color: #38a169;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .coming-soon-banner {
+            background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+            border: 2px solid #f6ad55;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .coming-soon-banner h3 {
+            color: #c05621;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">MindWell</h1>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="voice-agent.html">Voice Friend</a></li>
+                    <li><a href="heat-map.html">Stress Map</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="emotional-journey.html">My Journey</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="heat-map-container">
+        <div class="container">
+            <div class="heat-map-hero">
+                <h1 class="heat-map-title">Stress Heat Map</h1>
+                <p class="heat-map-subtitle">
+                    Visualizing mental health stress patterns across India to better understand where support is needed most and identify regional trends in youth mental wellness.
+                </p>
+            </div>
+
+            <div class="map-visualization">
+                <div class="india-map-placeholder">
+                    <div class="stress-indicators">
+                        <div class="stress-dot stress-high"></div>
+                        <div class="stress-dot stress-medium"></div>
+                        <div class="stress-dot stress-low"></div>
+                    </div>
+                    <div class="map-overlay">
+                        <h3>🗺️ Interactive Stress Map</h3>
+                        <p>Real-time visualization of stress levels across different regions</p>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color legend-high"></div>
+                        <span>High Stress Zones</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color legend-medium"></div>
+                        <span>Moderate Stress</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color legend-low"></div>
+                        <span>Low Stress Areas</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coming-soon-banner">
+                <h3>📊 Advanced Analytics Coming Soon</h3>
+                <p>We're developing sophisticated algorithms to analyze stress patterns, identify hotspots, and provide targeted mental health resources based on regional needs.</p>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4>📈 Trend Analysis</h4>
+                    <p>Track how stress levels change over time in different regions, helping identify seasonal patterns and emerging mental health challenges.</p>
+                </div>
+                <div class="insight-card">
+                    <h4>🎯 Targeted Support</h4>
+                    <p>Identify areas that need immediate mental health interventions and deploy resources where they're needed most.</p>
+                </div>
+                <div class="insight-card">
+                    <h4>🤝 Community Insights</h4>
+                    <p>Understand how different communities experience stress and tailor support programs to local cultural contexts.</p>
+                </div>
+                <div class="insight-card">
+                    <h4>🔍 Early Warning System</h4>
+                    <p>Detect emerging mental health crises before they escalate, enabling proactive support and intervention.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="firebase-config.js?v=2"></script>
+    <script type="module" src="auth.js?v=2"></script>
+    <script type="module" src="dashboard.js?v=2"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 // dashboard.js - Protected page logic
 import { auth } from './firebase-config.js';
-import { signOutUser, observeAuthState } from './auth.js';
+import { signOutUser, observeAuthState, shouldShowSurvey } from './auth.js';
 
 // DOM Elements
 const loadingScreen = document.getElementById('loadingScreen');
@@ -22,6 +22,11 @@ function initializeDashboard() {
   // Observe authentication state
   observeAuthState((user) => {
     if (user) {
+      // Check if user needs to complete survey first
+      if (shouldShowSurvey()) {
+        window.location.href = 'welcome-survey.html';
+        return;
+      }
       // User is authenticated - show dashboard
       showDashboard(user);
     } else {

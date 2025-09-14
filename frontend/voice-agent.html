@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Agent Friend - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .voice-agent-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            padding-top: 100px;
+        }
+
+        .agent-hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .agent-title {
+            font-size: 3rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .agent-subtitle {
+            font-size: 1.3rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .voice-interface {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .voice-wave {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .voice-wave::before {
+            content: '🎤';
+            font-size: 4rem;
+            color: white;
+        }
+
+        .voice-wave::after {
+            content: '';
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 2px solid #48bb78;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: ripple 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+
+        .status-text {
+            font-size: 1.2rem;
+            color: #38a169;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon {
+            background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+            border: 2px solid #f6ad55;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .coming-soon h3 {
+            color: #c05621;
+            margin-bottom: 1rem;
+        }
+
+        .features-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-preview {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .feature-preview h4 {
+            color: #38a169;
+            margin-bottom: 1rem;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">MindWell</h1>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="voice-agent.html">Voice Friend</a></li>
+                    <li><a href="heat-map.html">Stress Map</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="emotional-journey.html">My Journey</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="voice-agent-container">
+        <div class="floating-elements">
+            <div class="floating-element">💚</div>
+            <div class="floating-element">🌱</div>
+            <div class="floating-element">✨</div>
+        </div>
+
+        <div class="container">
+            <div class="agent-hero">
+                <h1 class="agent-title">Your AI Voice Friend</h1>
+                <p class="agent-subtitle">
+                    Meet your personal mental health companion - an AI voice agent designed to listen, understand, and support you through your emotional journey.
+                </p>
+
+                <div class="voice-interface">
+                    <div class="voice-wave"></div>
+                    <div class="status-text">Voice Agent Coming Soon</div>
+                    <p>Your AI friend will be here to chat, listen, and provide emotional support whenever you need it.</p>
+                </div>
+
+                <div class="coming-soon">
+                    <h3>🚀 Hero Product in Development</h3>
+                    <p>We're crafting an intelligent voice companion that will understand your emotions, provide personalized support, and be available 24/7 for meaningful conversations about your mental health.</p>
+                </div>
+            </div>
+
+            <div class="features-preview">
+                <div class="feature-preview">
+                    <h4>🎯 Emotional Intelligence</h4>
+                    <p>Advanced AI that recognizes emotional cues in your voice and responds with empathy and understanding.</p>
+                </div>
+                <div class="feature-preview">
+                    <h4>🌙 24/7 Availability</h4>
+                    <p>Your voice friend will be available anytime you need to talk, whether it's 3 AM or during a busy day.</p>
+                </div>
+                <div class="feature-preview">
+                    <h4>🔒 Complete Privacy</h4>
+                    <p>All conversations are private and secure, creating a safe space for you to express yourself freely.</p>
+                </div>
+                <div class="feature-preview">
+                    <h4>🎨 Personalized Support</h4>
+                    <p>Learns your preferences and provides customized coping strategies and mental health resources.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="firebase-config.js?v=2"></script>
+    <script type="module" src="auth.js?v=2"></script>
+    <script type="module" src="dashboard.js?v=2"></script>
+</body>
+</html>

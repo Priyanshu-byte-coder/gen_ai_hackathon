@@ -9,7 +9,8 @@ import {
     signInWithEmail, 
     signInWithGoogle, 
     signOutUser, 
-    observeAuthState 
+    observeAuthState,
+    shouldShowSurvey 
   } from './auth.js';
   
   // DOM Elements
@@ -51,6 +52,11 @@ import {
         // User is signed in
         showUserProfile(user);
         hideAuthModal();
+        
+        // Check if user needs to complete survey
+        if (shouldShowSurvey()) {
+          window.location.href = 'welcome-survey.html';
+        }
       } else {
         // User is signed out
         hideUserProfile();

@@ -17,3 +17,6 @@ Runs on port 3000
 
 ## Setup
 Instructions for setting up and running the frontend application will be added here.
+1.navigate to the frontedn directory (cd frontend)
+2.run the command (python -m http.server 3000)
+3.open your browser and navigate to http://localhost:3000

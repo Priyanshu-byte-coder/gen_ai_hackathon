@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Stories - MindWell</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .community-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            padding-top: 100px;
+        }
+
+        .community-hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .community-title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .community-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .share-story-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .share-story-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #48bb78;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+        }
+
+        .stories-feed {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #48bb78;
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .story-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .story-meta h4 {
+            color: #2d3748;
+            margin-bottom: 0.25rem;
+        }
+
+        .story-meta .story-date {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .story-content {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .story-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .story-tag {
+            background: #e6fffa;
+            color: #38a169;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .support-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .support-btn {
+            background: none;
+            border: none;
+            color: #38a169;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .support-btn:hover {
+            color: #2f855a;
+        }
+
+        .coming-soon-banner {
+            background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+            border: 2px solid #f6ad55;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .coming-soon-banner h3 {
+            color: #c05621;
+            margin-bottom: 1rem;
+        }
+
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #38a169;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">MindWell</h1>
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="voice-agent.html">Voice Friend</a></li>
+                    <li><a href="heat-map.html">Stress Map</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="emotional-journey.html">My Journey</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="community-container">
+        <div class="container">
+            <div class="community-hero">
+                <h1 class="community-title">Community Stories</h1>
+                <p class="community-subtitle">
+                    Share your journey, inspire others, and find strength in our supportive community. Every story matters and helps break the stigma around mental health.
+                </p>
+            </div>
+
+            <div class="community-stats">
+                <div class="stat-card">
+                    <div class="stat-number">1,247</div>
+                    <div class="stat-label">Stories Shared</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3,891</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15,672</div>
+                    <div class="stat-label">Hearts of Support</div>
+                </div>
+            </div>
+
+            <div class="share-story-section">
+                <h2 style="text-align: center; color: #2d3748; margin-bottom: 2rem;">Share Your Story</h2>
+                <form class="share-story-form">
+                    <div class="form-group">
+                        <label for="storyTitle">Story Title (Optional)</label>
+                        <input type="text" id="storyTitle" placeholder="Give your story a title...">
+                    </div>
+                    <div class="form-group">
+                        <label for="storyContent">Your Story</label>
+                        <textarea id="storyContent" placeholder="Share your mental health journey, what you've learned, or words of encouragement for others..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="storyTags">Tags (Optional)</label>
+                        <input type="text" id="storyTags" placeholder="anxiety, depression, recovery, hope, therapy...">
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="share-btn">Share My Story 💚</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="coming-soon-banner">
+                <h3>🚀 Enhanced Community Features Coming Soon</h3>
+                <p>We're building advanced moderation, story categorization, peer support matching, and professional counselor connections to make this the safest and most supportive space possible.</p>
+            </div>
+
+            <div class="stories-feed">
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar">A</div>
+                        <div class="story-meta">
+                            <h4>Anonymous User</h4>
+                            <div class="story-date">2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        "I never thought I'd share this, but therapy changed my life. For months, I was struggling with anxiety and felt so alone. Finding the courage to seek help was the hardest part, but it was worth it. To anyone reading this - you're not alone, and it's okay to ask for help."
+                    </div>
+                    <div class="story-tags">
+                        <span class="story-tag">anxiety</span>
+                        <span class="story-tag">therapy</span>
+                        <span class="story-tag">hope</span>
+                    </div>
+                    <div class="support-actions">
+                        <button class="support-btn">💚 47 Hearts</button>
+                        <button class="support-btn">💬 12 Comments</button>
+                        <button class="support-btn">🤗 Send Support</button>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar">R</div>
+                        <div class="story-meta">
+                            <h4>Rahul K.</h4>
+                            <div class="story-date">1 week ago</div>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        "College pressure was overwhelming me. I started using meditation apps and joined a support group. Small steps, but they made a huge difference. Remember - progress isn't always linear, and that's okay."
+                    </div>
+                    <div class="story-tags">
+                        <span class="story-tag">college-stress</span>
+                        <span class="story-tag">meditation</span>
+                        <span class="story-tag">progress</span>
+                    </div>
+                    <div class="support-actions">
+                        <button class="support-btn">💚 89 Hearts</button>
+                        <button class="support-btn">💬 23 Comments</button>
+                        <button class="support-btn">🤗 Send Support</button>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar">P</div>
+                        <div class="story-meta">
+                            <h4>Priya S.</h4>
+                            <div class="story-date">2 weeks ago</div>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        "Breaking the stigma starts with us. I told my family about my mental health struggles, and their support surprised me. Sometimes the people we think won't understand are the ones who care the most."
+                    </div>
+                    <div class="story-tags">
+                        <span class="story-tag">family-support</span>
+                        <span class="story-tag">stigma</span>
+                        <span class="story-tag">courage</span>
+                    </div>
+                    <div class="support-actions">
+                        <button class="support-btn">💚 156 Hearts</button>
+                        <button class="support-btn">💬 34 Comments</button>
+                        <button class="support-btn">🤗 Send Support</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="firebase-config.js?v=2"></script>
+    <script type="module" src="auth.js?v=2"></script>
+    <script type="module" src="dashboard.js?v=2"></script>
+</body>
+</html>
